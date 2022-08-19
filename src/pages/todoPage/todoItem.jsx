@@ -89,53 +89,67 @@ const Container = styled.div`
 
 const CheckButton = styled(FontAwesomeIcon)`
   cursor: pointer;
+  margin-right: 5px;
+  &:hover {
+    color: ${({ theme }) => theme.colors.MAIN_COLOR};
+  }
 `;
 
-const TodoForm = styled.form``;
+const TodoForm = styled.form`
+  display: flex;
+  align-items: center;
+`;
 
 const MainTodo = styled.div`
   text-decoration: ${({ itemIsCompleted }) =>
     itemIsCompleted ? "line-through" : "none"};
-  text-decoration-color: ${({ itemIsCompleted }) =>
-    itemIsCompleted ? "red" : "none"};
+  text-decoration-color: ${(props) =>
+    props.itemIsCompleted ? props.theme.colors.ORANGE_900 : "none"};
   color: ${(props) =>
-    props.itemIsCompleted ? props.theme.colors.GREY_30 : "black"};
+    props.itemIsCompleted
+      ? props.theme.colors.GREY_30
+      : props.theme.colors.BLACK};
   transition: all 300ms ease-in-out;
 `;
 
-const MainTodoInput = styled.input``;
+const MainTodoInput = styled.input`
+  width: 100px;
+  border: none;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.MAIN_COLOR};
+`;
 
 const ModifyButton = styled.button`
   cursor: pointer;
-  color: red;
+  color: ${({ theme }) => theme.colors.ORANGE_900};
   &:hover {
-    color: blue;
+    color: ${({ theme }) => theme.colors.MAIN_COLOR};
     transition: all 300ms ease-in-out;
   }
 `;
 
 const SubmitButton = styled.button`
   cursor: pointer;
-  color: red;
+  color: ${({ theme }) => theme.colors.ORANGE_900};
   &:hover {
-    color: blue;
+    color: ${({ theme }) => theme.colors.MAIN_COLOR};
     transition: all 300ms ease-in-out;
   }
 `;
 
 const CancelButton = styled.div`
   cursor: pointer;
-  color: red;
+  color: ${({ theme }) => theme.colors.ORANGE_900};
   &:hover {
-    color: blue;
+    color: ${({ theme }) => theme.colors.MAIN_COLOR};
     transition: all 300ms ease-in-out;
   }
 `;
 
 const TodoDeleteButton = styled(FontAwesomeIcon)`
+  margin-left: 5px;
   cursor: pointer;
   &:hover {
-    color: red;
+    color: ${({ theme }) => theme.colors.ORANGE_900};
     transition: all 300ms ease-in-out;
   }
 `;

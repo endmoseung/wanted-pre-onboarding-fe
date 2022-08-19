@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { post_signIn } from "../../common/axios";
+import { postSignIn } from "../../common/axios";
 
 const Login = () => {
   const [emailState, setEmailState] = useState(false);
@@ -10,11 +10,6 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/todo");
-  //   }
-  // }, []);
   const onChangeEmail = (e) => {
     const inputLen = e.target.value.length;
     if (inputLen > 2) {
@@ -34,7 +29,7 @@ const Login = () => {
   };
 
   const signIn = async (email, password) => {
-    const result = await post_signIn(email, password);
+    const result = await postSignIn(email, password);
     localStorage.setItem("token", JSON.stringify(result));
     window.location.replace("/");
     navigate("/todo");
@@ -54,7 +49,7 @@ const Login = () => {
     <Container>
       <MainContainer>
         <MainTitle>
-          Todo를 이용하기 위해<br></br> 로그인을 해주세요 🍳{" "}
+          Todo를 이용하기 위해<br></br> 로그인을 해주세요😀
         </MainTitle>
         <LoginForm onSubmit={handleSubmit}>
           <LoginWrapper>
@@ -62,7 +57,7 @@ const Login = () => {
             <LoginInput
               onChange={onChangeEmail}
               name="email"
-              placeholder="naengpa@naengpa.com"
+              placeholder="wanted@wanted.com"
               type={"text"}
             ></LoginInput>
           </LoginWrapper>
@@ -97,7 +92,7 @@ const Container = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   input {
     outline: none;
     border: none;
@@ -150,12 +145,18 @@ const LoginInput = styled.input`
 `;
 
 const SignInButton = styled.button`
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.MAIN_COLOR};
-  font-size: 16px;
+  margin-top: 32px;
   font-weight: 600;
-  padding: 0;
-  margin-top: 16px;
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.WHITE};
+  background-color: ${({ theme }) => theme.colors.MAIN_COLOR};
+  padding: 15px 0;
+  width: 100%;
+  border-radius: 5px;
+  &:hover {
+    color: ${({ theme }) => theme.colors.ORANGE_900};
+  }
+  transition: color 150ms ease-in-out;
 `;
 
 const PasswordInput = styled.input`
@@ -182,4 +183,9 @@ const LoginButton = styled.button`
   padding: 15px 0;
   width: 100%;
   border-radius: 5px;
+  border-radius: 5px;
+  &:hover {
+    color: ${({ theme }) => theme.colors.ORANGE_900};
+  }
+  transition: all 150ms ease-in-out;
 `;

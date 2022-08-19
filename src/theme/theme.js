@@ -6,6 +6,7 @@ const colors = {
   GREY_30: "#B6C4CF",
   GREY_50: "#688191",
   GREY_60: "#415867",
+  BLACK: "#000000",
   WHITE: "#FFFFFF",
   ORANGE_900: "#FF6F00",
 };

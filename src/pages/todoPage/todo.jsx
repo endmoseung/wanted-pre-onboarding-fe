@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { create_Todos, delete_Todos, get_Todos } from "../../common/axios";
+import { createTodos, deleteTodos, getTodos } from "../../common/axios";
 import TodoItem from "./todoItem";
 
 const Todo = () => {
@@ -13,19 +13,19 @@ const Todo = () => {
   }, []);
 
   const getPosts = async () => {
-    const result = await get_Todos();
+    const result = await getTodos();
     setTodoList((prev) => [...result]);
   };
 
   const handleAddList = async (e) => {
     e.preventDefault();
-    await create_Todos(e.target[0].value);
+    await createTodos(e.target[0].value);
     await getPosts();
     e.target.reset();
   };
 
   const handleDelete = async (id) => {
-    await delete_Todos(id);
+    await deleteTodos(id);
     await getPosts();
   };
 
@@ -61,9 +61,20 @@ const Todo = () => {
 
 export default Todo;
 
-const LogoutButton = styled.div`
+const LogoutButton = styled.button`
   cursor: pointer;
   margin-bottom: 100px;
+  position: absolute;
+  color: ${({ theme }) => theme.colors.WHITE};
+  background-color: ${({ theme }) => theme.colors.MAIN_COLOR};
+  padding: 10px 20px;
+  border-radius: 10px;
+  top: 20%;
+  right: 30px;
+  transition: all 150ms ease-in;
+  &:hover {
+    color: ${({ theme }) => theme.colors.ORANGE_900};
+  }
 `;
 
 const Container = styled.div`
@@ -73,6 +84,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const Header = styled.header`
@@ -85,6 +97,7 @@ const TodoListContainer = styled.div``;
 
 const AddListWrapper = styled.form`
   display: flex;
+  align-items: center;
 `;
 
 const AddListInput = styled.input`
@@ -101,8 +114,12 @@ const AddListInput = styled.input`
 const AddListButton = styled.button``;
 
 const FontAwesomePlus = styled(FontAwesomeIcon)`
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
+  transition: all 300ms ease-in;
+  &:hover {
+    color: ${({ theme }) => theme.colors.MAIN_COLOR};
+  }
 `;
 
 const TodoLists = styled.div``;

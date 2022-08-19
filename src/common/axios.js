@@ -2,7 +2,7 @@ import axios from "axios";
 let baseURL =
   "https://5co7shqbsf.execute-api.ap-northeast-2.amazonaws.com/production";
 
-export async function post_signUp(email, password) {
+export async function postSignUp(email, password) {
   try {
     const response = await axios({
       url: `${baseURL}/auth/signup`,
@@ -15,13 +15,12 @@ export async function post_signUp(email, password) {
     });
     return response.data;
   } catch (error) {
-    alert();
-    // alert("존재하는 이메일입니다.");
+    alert("존재하는 이메일입니다.");
     throw new Error(error);
   }
 }
 
-export async function post_signIn(email, password) {
+export async function postSignIn(email, password) {
   try {
     const response = await axios({
       url: `${baseURL}/auth/signin`,
@@ -39,7 +38,7 @@ export async function post_signIn(email, password) {
   }
 }
 
-export async function create_Todos(todos) {
+export async function createTodos(todos) {
   try {
     const response = await axios({
       url: `${baseURL}/todos`,
@@ -61,7 +60,7 @@ export async function create_Todos(todos) {
   }
 }
 
-export async function get_Todos() {
+export async function getTodos() {
   try {
     const { data } = await axios({
       url: `${baseURL}/todos`,
@@ -78,7 +77,7 @@ export async function get_Todos() {
   }
 }
 
-export async function delete_Todos(id) {
+export async function deleteTodos(id) {
   try {
     const response = await axios({
       url: `${baseURL}/todos/${id}`,

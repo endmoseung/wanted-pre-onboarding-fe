@@ -22,4 +22,10 @@ const Wrapper = styled.div``;
 
 const BackButton = styled(FontAwesomeIcon)`
   cursor: pointer;
+  font-size: 25px;
+  margin-bottom: 20px;
+  transition: all 150ms ease-in;
+  &:hover {
+    color: ${({ theme }) => theme.colors.MAIN_COLOR};
+  }
 `;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { post_signUp } from "../../common/axios";
+import { postSignUp } from "../../common/axios";
 import { useNavigate } from "react-router-dom";
 import GoBackButton from "../../components/goBackButton";
 
@@ -13,14 +13,14 @@ const SignIn = () => {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
-    (async () => {
-      let promise = new Promise((resolve, reject) => {
-        resolve(post_signUp(email, password));
-      });
-      let result = await promise;
+    signUp(email, password);
+  };
+
+  const signUp = async (email, password) => {
+    const result = await postSignUp(email, password);
+    if (result) {
       navigate("/");
-      console.log(result);
-    })();
+    }
   };
 
   const onChangeEmail = (e) => {
@@ -47,11 +47,16 @@ const SignIn = () => {
       <SignInForm onSubmit={handleSubmit}>
         <InputEmailWrapper>
           <InputEmailTitle>이메일</InputEmailTitle>
-          <InputEmail onChange={onChangeEmail} type={"text"}></InputEmail>
+          <InputEmail
+            placeholder="이메일 주소 입력"
+            onChange={onChangeEmail}
+            type={"text"}
+          ></InputEmail>
         </InputEmailWrapper>
         <InputPasswordWrapper>
           <InputPasswordTitle>비밀번호</InputPasswordTitle>
           <InputPassword
+            placeholder="비밀번호 입력"
             onChange={onChangePassword}
             type={"password"}
           ></InputPassword>
