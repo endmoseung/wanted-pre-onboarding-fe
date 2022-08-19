@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ isAuthenticated, children, pathname, token }) => {
-  if (!isAuthenticated) {
+  if (pathname === "/todo" && !isAuthenticated) {
     return <Navigate to="/" />;
   }
   if (pathname === "/" && token) {
