@@ -33,18 +33,18 @@ const Login = () => {
     }
   };
 
+  const signIn = async (email, password) => {
+    const result = await post_signIn(email, password);
+    localStorage.setItem("token", JSON.stringify(result));
+    window.location.replace("/");
+    navigate("/todo");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
-    (async () => {
-      let promise = new Promise((resolve, reject) => {
-        resolve(post_signIn(email, password));
-      });
-      let result = await promise;
-      localStorage.setItem("token", JSON.stringify(result));
-      navigate("/todo");
-    })();
+    signIn(email, password);
   };
 
   const linkToSignIn = () => {

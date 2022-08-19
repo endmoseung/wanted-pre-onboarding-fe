@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { post_signUp } from "../../common/axios";
 import { useNavigate } from "react-router-dom";
+import GoBackButton from "../../components/goBackButton";
 
 const SignIn = () => {
   const [passwordState, setPasswordState] = useState();
@@ -41,6 +42,7 @@ const SignIn = () => {
 
   return (
     <SignInContainer>
+      <GoBackButton></GoBackButton>
       <MainTitle>회원가입</MainTitle>
       <SignInForm onSubmit={handleSubmit}>
         <InputEmailWrapper>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -7,57 +6,37 @@ import { create_Todos, delete_Todos, get_Todos } from "../../common/axios";
 import TodoItem from "./todoItem";
 
 const Todo = () => {
-  const navigate = useNavigate();
   const [todoList, setTodoList] = useState();
 
   useEffect(() => {
-    // if (!localStorage.getItem("token")) {
-    //   navigate("/");
-    // }
     getPosts();
   }, []);
 
   const getPosts = async () => {
     const result = await get_Todos();
-    console.log("res", result);
     setTodoList((prev) => [...result]);
   };
 
-  // const refresh = async() =>{
-  //   d~~~
-  //   ~~~
-  // }
-
   const handleAddList = async (e) => {
     e.preventDefault();
-    console.log(e.target[0].value);
-    // (async () => {
-    //   let promise = new Promise((resolve, reject) => {
-    //     resolve(create_Todos(e.target[0].value));
-    //   });
-    //   let result = await promise;
-    //   console.log(result);
-    // })();
     await create_Todos(e.target[0].value);
     await getPosts();
     e.target.reset();
   };
 
   const handleDelete = async (id) => {
-    (async () => {
-      let promise = new Promise((resolve, reject) => {
-        resolve(delete_Todos(id));
-      });
-      let result = await promise;
-    })();
+    await delete_Todos(id);
     await getPosts();
   };
-  if (!todoList) {
-    return <div>Loading</div>;
-  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.replace("/todo");
+  };
 
   return (
     <Container>
+      <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
       <Header>투두 리스트</Header>
       <TodoListContainer>
         <AddListWrapper onSubmit={handleAddList}>
@@ -81,6 +60,11 @@ const Todo = () => {
 };
 
 export default Todo;
+
+const LogoutButton = styled.div`
+  cursor: pointer;
+  margin-bottom: 100px;
+`;
 
 const Container = styled.div`
   width: 100%;

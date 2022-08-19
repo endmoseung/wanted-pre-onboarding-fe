@@ -15,7 +15,8 @@ export async function post_signUp(email, password) {
     });
     return response.data;
   } catch (error) {
-    alert("이미 있는 이메일입니다.");
+    alert();
+    // alert("존재하는 이메일입니다.");
     throw new Error(error);
   }
 }
@@ -86,6 +87,28 @@ export async function delete_Todos(id) {
         authorization: `Bearer ${
           JSON.parse(localStorage.getItem("token")).access_token
         }`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function updateTodo(itemTodo, completed, itemId) {
+  try {
+    const response = await axios({
+      url: `${baseURL}/todos/${itemId}`,
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("token")).access_token
+        }`,
+        ContentType: "application/json",
+      },
+      data: {
+        todo: itemTodo,
+        isCompleted: completed,
       },
     });
     return response.data;
