@@ -7,7 +7,7 @@ import TodoItem from "./todoItem";
 
 const Todo = () => {
   const [todoList, setTodoList] = useState();
-
+  console.log(todoList);
   useEffect(() => {
     getPosts();
   }, []);
@@ -26,6 +26,7 @@ const Todo = () => {
 
   const handleDelete = async (id) => {
     await deleteTodos(id);
+    console.log(id);
     await getPosts();
   };
 

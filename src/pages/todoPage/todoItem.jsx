@@ -9,9 +9,9 @@ const TodoItem = ({ item, handleDelete }) => {
   const [modifyState, setModifyState] = useState(true);
   const [inputChange, setInputChange] = useState("");
 
-  const itemId = itemState?.id;
-  const itemTodo = itemState?.todo;
-  const itemIsCompleted = itemState?.isCompleted;
+  const itemId = item.id;
+  const itemTodo = item.todo;
+  const itemIsCompleted = item.isCompleted;
 
   const onClickDelete = () => {
     handleDelete(itemId);
@@ -19,7 +19,7 @@ const TodoItem = ({ item, handleDelete }) => {
 
   const onClickCheck = async () => {
     let completed;
-    if (itemState.isCompleted) {
+    if (itemIsCompleted.isCompleted) {
       completed = false;
     } else {
       completed = true;
