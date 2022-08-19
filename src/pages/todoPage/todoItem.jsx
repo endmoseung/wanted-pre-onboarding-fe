@@ -4,12 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { updateTodo } from "../../common/axios";
 
-const TodoItem = ({ item, handleDelete }) => {
-  const [itemState, setItemState] = useState(item);
+const TodoItem = ({ item, handleDelete, getPosts }) => {
   const [modifyState, setModifyState] = useState(true);
   const [inputChange, setInputChange] = useState("");
 
-  console.log(itemState);
   const itemId = item.id;
   const itemTodo = item.todo;
   const itemIsCompleted = item.isCompleted;
@@ -20,7 +18,7 @@ const TodoItem = ({ item, handleDelete }) => {
 
   const onClickCheck = async () => {
     let completed;
-    if (itemIsCompleted.isCompleted) {
+    if (itemIsCompleted) {
       completed = false;
     } else {
       completed = true;
@@ -29,8 +27,8 @@ const TodoItem = ({ item, handleDelete }) => {
   };
 
   const updateTodos = async (itemTodo, completed, itemId) => {
-    const result = await updateTodo(itemTodo, completed, itemId);
-    setItemState(result);
+    await updateTodo(itemTodo, completed, itemId);
+    getPosts();
   };
 
   const handleModify = () => {
@@ -59,6 +57,7 @@ const TodoItem = ({ item, handleDelete }) => {
       ) : (
         <TodoForm onSubmit={handleSubmit}>
           <MainTodoInput
+            autoFocus
             value={inputChange}
             onChange={onChangeInput}
             type="text"

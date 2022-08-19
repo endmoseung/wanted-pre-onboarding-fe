@@ -5,14 +5,7 @@ import pages from "./pages";
 import ProtectedRoute from "./protectedRoute";
 
 const RootRoute = () => {
-  const trueCheck = (item) => {
-    if (item === !null) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const token = trueCheck(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
   return (
     <BrowserRouter>
       <Routes>
