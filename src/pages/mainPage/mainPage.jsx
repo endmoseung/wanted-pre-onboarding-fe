@@ -7,6 +7,7 @@ import { postSignIn } from "../../common/axios";
 const Login = () => {
   const [emailState, setEmailState] = useState(false);
   const [passwordState, setPasswordState] = useState(false);
+  const [tokenState, setTokenState] = useState(localStorage.getItem("token"));
 
   const navigate = useNavigate();
 
@@ -31,7 +32,8 @@ const Login = () => {
   const signIn = async (email, password) => {
     const result = await postSignIn(email, password);
     localStorage.setItem("token", JSON.stringify(result));
-    window.location.replace("/");
+    setTokenState(localStorage.getItem("token"));
+    console.log(tokenState);
     navigate("/todo");
   };
 

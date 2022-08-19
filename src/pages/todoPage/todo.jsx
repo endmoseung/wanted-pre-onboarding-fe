@@ -35,7 +35,7 @@ const Todo = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.replace("/todo");
+    setTodoList({ ...todoList });
     navigate("/");
   };
 
