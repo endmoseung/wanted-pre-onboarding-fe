@@ -9,6 +9,7 @@ const TodoItem = ({ item, handleDelete }) => {
   const [modifyState, setModifyState] = useState(true);
   const [inputChange, setInputChange] = useState("");
 
+  console.log(itemState);
   const itemId = item.id;
   const itemTodo = item.todo;
   const itemIsCompleted = item.isCompleted;
