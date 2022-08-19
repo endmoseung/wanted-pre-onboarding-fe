@@ -4,11 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { createTodos, deleteTodos, getTodos } from "../../common/axios";
 import TodoItem from "./todoItem";
-import { useNavigate } from "react-router-dom";
 
 const Todo = () => {
   const [todoList, setTodoList] = useState();
-  const navigate = useNavigate();
 
   console.log(todoList);
   useEffect(() => {
@@ -35,8 +33,7 @@ const Todo = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setTodoList({ ...todoList });
-    navigate("/");
+    window.location.reload();
   };
 
   return (
