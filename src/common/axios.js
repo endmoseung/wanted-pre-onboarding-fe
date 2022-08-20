@@ -4,7 +4,7 @@ let baseURL =
 
 export async function postSignUp(email, password) {
   try {
-    const response = await axios({
+    const { data } = await axios({
       url: `${baseURL}/auth/signup`,
       method: "POST",
       headers: { ContentType: "application/json" },
@@ -13,7 +13,7 @@ export async function postSignUp(email, password) {
         password: password,
       },
     });
-    return response.data;
+    return data;
   } catch (error) {
     alert("존재하는 이메일입니다.");
     throw new Error(error);
@@ -22,7 +22,7 @@ export async function postSignUp(email, password) {
 
 export async function postSignIn(email, password) {
   try {
-    const response = await axios({
+    const { data } = await axios({
       url: `${baseURL}/auth/signin`,
       method: "POST",
       headers: { ContentType: "application/json" },
@@ -31,7 +31,7 @@ export async function postSignIn(email, password) {
         password: password,
       },
     });
-    return response.data;
+    return data;
   } catch (error) {
     alert("비밀번호와 아이디를 다시 확인해주세요.");
     throw new Error(error);
@@ -40,7 +40,7 @@ export async function postSignIn(email, password) {
 
 export async function createTodos(todos) {
   try {
-    const response = await axios({
+    const { data } = await axios({
       url: `${baseURL}/todos`,
       method: "POST",
       headers: {
@@ -53,7 +53,7 @@ export async function createTodos(todos) {
         todo: todos,
       },
     });
-    return response.data;
+    return data;
   } catch (error) {
     alert("한글자 이상의 단어를 써주세요!");
     throw new Error(error);
@@ -79,7 +79,7 @@ export async function getTodos() {
 
 export async function deleteTodos(id) {
   try {
-    const response = await axios({
+    const { data } = await axios({
       url: `${baseURL}/todos/${id}`,
       method: "DELETE",
       headers: {
@@ -88,7 +88,7 @@ export async function deleteTodos(id) {
         }`,
       },
     });
-    return response.data;
+    return data;
   } catch (error) {
     throw new Error(error);
   }
@@ -96,7 +96,7 @@ export async function deleteTodos(id) {
 
 export async function updateTodo(itemTodo, completed, itemId) {
   try {
-    const response = await axios({
+    const { data } = await axios({
       url: `${baseURL}/todos/${itemId}`,
       method: "PUT",
       headers: {
@@ -110,7 +110,7 @@ export async function updateTodo(itemTodo, completed, itemId) {
         isCompleted: completed,
       },
     });
-    return response.data;
+    return data;
   } catch (error) {
     throw new Error(error);
   }
